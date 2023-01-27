@@ -6,8 +6,10 @@ package exercise1;
  * To be used as starting code in Exercise
  *
  * @author dancye
+ * @author Jiaxin Yan
  * @author Paul Bonenfant Jan 25, 2022 
  */
+import java.util.*;
 public class CardTrick {
     
     public static void main(String[] args) {
@@ -15,14 +17,20 @@ public class CardTrick {
         Card[] hand = new Card[7];
 
         for (int i = 0; i < hand.length; i++) {
-            Card card = new Card();
             //card.setValue(insert call to random number generator here)
             // 
             //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
             // Hint: You can use Random -> random.nextInt(n) to get a random number between 0 and n-1 (inclusive)
             //       Don't worry about duplicates at this point
+            Card card = new Card();
+            Random ran = new Random();
+            card.setValue(1 + ran.nextInt(12));
+            card.setSuit(Card.SUITS[ran.nextInt(4)]);
+            hand[i] = card;
+          
         }
-
+        
+    
         // insert code to ask the user for Card value and suit, create their card
         // and search the hand here. 
         // Hint: You can ask for values 1 to 10, and then
@@ -33,6 +41,20 @@ public class CardTrick {
         
         // If the guess is successful, invoke the printInfo() method below.
         
+        Scanner input = new Scanner(System.in);
+        Card card = new Card();
+        System.out.println("pick  card suit and value");
+        int cardSuit = input.nextInt();
+        int cardNumber = input.nextInt();
+
+        card.setSuit(Card.SUITS[cardSuit]);
+        card.setValue(cardNumber);
+ 
+        for(int i = 0; i < hand.length; i++){
+            if(hand[i].getValue() == card.getValue() && hand[i].getSuit() == card.getSuit()) {
+                printInfo();
+            }
+        }
     }
 
     /**
